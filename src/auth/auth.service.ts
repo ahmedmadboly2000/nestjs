@@ -1,4 +1,4 @@
-import { BadRequestException,Injectable } from '@nestjs/common';
+import { BadRequestException,Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { PartialType } from "@nestjs/mapped-types";
@@ -39,22 +39,6 @@ export class AuthService {
       return null;
     }
 
-    // async updateToken({ id,token}) {
-      
-    //   await knex('users')
-    //     .where('id', id)
-    //     .update(
-    //       {
-    //         token
-    //       }
-    //     );
-    //   return token;
-    // };
-    
-  //   async updateToken(token:any,id:any): Promise<User | undefined>{
-  //     return User.query().update({token}).where('id',id)
-      
-  // }
     async login(user: any) {
       const payload = { username: user.username, sub: user.id };
       const token={access_token: this.jwtService.sign(payload,{secret:'secretKey'})};
@@ -65,7 +49,28 @@ export class AuthService {
         
       };
     }
-
+    // async check(access_token:any): Promise<any> {
+    //   const user = await User.query().where('access_token',access_token)
+    //   if (!user) {
+    //     throw new UnauthorizedException("token is not correct");
+    //   }
+    //   return user;
+    // }
+    
+    async check (access_token:any){
+      // const row =await User.query()
+      // .where('access_token',data.access_token).first()
+    //   const user = await this.usersService.findToken(access_token);
+    //   if (user && user.access_token === access_token) {
+    //     const { access_token, ...result } = user;
+    //     return result;
+    //   }
+    //   return 'not found';
+    // }
+    const user = await this.usersService.findToken(access_token);
+    if (!user) {
+      throw new UnauthorizedException("token is not correct");
+    }
+    return user;
   }
-  
-
+}

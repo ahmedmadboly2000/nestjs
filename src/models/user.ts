@@ -1,12 +1,14 @@
 const { objection } = require('objection');
 import { Model } from "objection";
 export default class User extends Model {
-  id(id: any, username: any) {
-    throw new Error('Method not implemented.');
-  }
-  username(id: any, username: any) {
-    throw new Error('Method not implemented.');
-  }
+  
+  access_token: any;
+  // id(id: any, username: any) {
+  //   throw new Error('Method not implemented.');
+  // }
+  // username(id: any, username: any) {
+  //   throw new Error('Method not implemented.');
+  // }
   static this: any;
   password: string;
   
@@ -23,7 +25,7 @@ export default class User extends Model {
         username: { type: 'string', minLength: 1, maxLength: 255 },
         password: { type: 'string', minLength: 1, maxLength: 255 },
         email: { type: 'string', minLength: 1, maxLength: 255 },
-        token: { type: 'string', minLength: 1, maxLength: 255 },
+        access_token: { type: 'string', minLength: 1, maxLength: 255 },
 
       }
     };

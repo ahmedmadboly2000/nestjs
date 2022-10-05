@@ -45,4 +45,11 @@ export class UsersService {
           console.log(token,'2');
       return q;
     };
+    async findToken(access_token:any): Promise<User | undefined>{
+      console.log(access_token);
+      
+      return User.query().where({access_token}).first()
+      // return this.users.find(user => user.username === username);
+   
+    }
   }
