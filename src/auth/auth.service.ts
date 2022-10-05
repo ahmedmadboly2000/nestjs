@@ -7,6 +7,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto){}
 import { Knex } from 'knex';
 import { InjectModel } from 'nest-knexjs';
 import User from 'src/models/user';
+import knex from 'src/db/client_knex';
 
 
 ({
@@ -37,15 +38,34 @@ export class AuthService {
       }
       return null;
     }
+
+    // async updateToken({ id,token}) {
+      
+    //   await knex('users')
+    //     .where('id', id)
+    //     .update(
+    //       {
+    //         token
+    //       }
+    //     );
+    //   return token;
+    // };
+    
+  //   async updateToken(token:any,id:any): Promise<User | undefined>{
+  //     return User.query().update({token}).where('id',id)
+      
+  // }
     async login(user: any) {
       const payload = { username: user.username, sub: user.id };
-           return  User.query().where({}).first()
-
-      // return {
-      //   access_token: this.jwtService.sign(payload,{secret:'secretKey'}),
-      // };
+      const token={access_token: this.jwtService.sign(payload,{secret:'secretKey'})};
+      const q = await this.usersService.updateToken(user.id,token);
+      return {
+        // access_token: this.jwtService.sign(payload,{secret:'secretKey'}),
+        token
+        
+      };
     }
 
   }
-    
+  
 

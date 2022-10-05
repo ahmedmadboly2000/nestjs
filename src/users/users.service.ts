@@ -37,4 +37,12 @@ export class UsersService {
         // return this.users.find(user => user.username === username);
      
       }
-    }
+   
+    async updateToken(id,token) {
+      console.log(token,'1');
+      const q= await User.query().update(token).where('id',id)
+     
+          console.log(token,'2');
+      return q;
+    };
+  }

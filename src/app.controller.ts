@@ -23,12 +23,19 @@ export class AppController {
   {
     return "test" 
   }
+  // @UseGuards(AuthGuard('local'))
+  // @Post('login')
+  // async login(@Request() req:any) {
+  //   console.log(req.body);
+    
+  //   return this.authService.login(req.user);
+  // }
   @UseGuards(AuthGuard('local'))
   @Post('login')
   async login(@Request() req:any) {
     console.log(req.body);
     
-    return this.authService.login(req.user);
+    return (req.user);
   }
   // @UseGuards(AuthGuard('local'))
   // @Post('auth/login')

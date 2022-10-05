@@ -26,10 +26,16 @@ export class AuthController {
   @Post('login')
   async login(@Request() req:any) {
     console.log(req.body);
-    
+    // this.authService.
     return this.authService.login(req.user);
   }
-
+// @UseGuards(AuthGuard('local'))
+//   @Post('login')
+//   async login(@Request() req:any) {
+//     console.log(req.body);
+    
+//     return (req.user);
+//   }
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@Request() req) {
