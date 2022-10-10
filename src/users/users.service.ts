@@ -38,18 +38,30 @@ export class UsersService {
      
       }
    
-    async updateToken(id,token) {
-      console.log(token,'1');
-      const q= await User.query().update(token).where('id',id)
+    async updateToken(id,access_token) {
+      // console.log(token,'1');
+      const q= await User.query().update(access_token).where('id',id)
      
-          console.log(token,'2');
+          // console.log(token,'2');
       return q;
     };
-    async findToken(access_token:any): Promise<User | undefined>{
+    async findToken(access_token:string): Promise<User | undefined>{
       console.log(access_token);
       
+      if(access_token.split(" ").length > 1){
+        // console.log(access_token.split(" ")[1]);
+        console.log(access_token.includes("Bearer "));
+        access_token = access_token.split(" ").pop()
+        
+        // if(access_token.includes("Bearer ")){
+        //   access_token = access_token.split(" ")[1]
+        // }
+      }
+        
+
       return User.query().where({access_token}).first()
       // return this.users.find(user => user.username === username);
    
     }
+    
   }

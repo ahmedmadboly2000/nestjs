@@ -1,6 +1,7 @@
 import { Get, Controller, Request, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth/auth.service';
+import { AuthenticatedGuard } from './auth/jwt-auth.guard';
 import knex from './db/client_knex';
 var DB=require("./db/migrations/20220927155625_users")
 knex;
@@ -37,6 +38,15 @@ export class AppController {
     
     return (req.user);
   }
+  
+  @UseGuards(AuthenticatedGuard)
+        @Get('profile')
+        getProfile(@Request() req) {
+          // console.log(req.header('authorization')); 
+        
+          return this.authService.check(req.header('authorization'));
+          
+        }
   // @UseGuards(AuthGuard('local'))
   // @Post('auth/login')
   // async login(@Request() req) {

@@ -6,8 +6,6 @@ import { CreateUserDto } from '../users/dto/create-user.dto';
 export class UpdateUserDto extends PartialType(CreateUserDto){}
 import { Knex } from 'knex';
 import { InjectModel } from 'nest-knexjs';
-import User from 'src/models/user';
-import knex from 'src/db/client_knex';
 
 
 ({
@@ -49,24 +47,16 @@ export class AuthService {
         
       };
     }
-    // async check(access_token:any): Promise<any> {
-    //   const user = await User.query().where('access_token',access_token)
-    //   if (!user) {
-    //     throw new UnauthorizedException("token is not correct");
-    //   }
-    //   return user;
-    // }
-    
-    async check (access_token:any){
-      // const row =await User.query()
-      // .where('access_token',data.access_token).first()
+ 
+    async check (access_token:string){
+      //  access_token = authorizationHeader.substring("Bearer ".length);
     //   const user = await this.usersService.findToken(access_token);
     //   if (user && user.access_token === access_token) {
     //     const { access_token, ...result } = user;
     //     return result;
     //   }
     //   return 'not found';
-    // }
+    // // // }
     const user = await this.usersService.findToken(access_token);
     if (!user) {
       throw new UnauthorizedException("token is not correct");

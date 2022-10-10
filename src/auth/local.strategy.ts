@@ -21,4 +21,11 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     }
     return user;
   }
+  // async validateToken( access_token: string): Promise<any> {
+  //   const user = await this.authService.check(access_token);
+  //   if (!user) {
+  //     throw new UnauthorizedException("token is not correct");
+  //   }
+  //   return user;
+  // }
 }
