@@ -34,6 +34,17 @@ export class AuthController {
           return this.authService.check(req.header('authorization'));
           
         }
+
+        // @UseGuards(AuthGuard('local'))
+      @Post('register')
+      async register(@Request() req:any) {
+        console.log(req.body);
+        // this.authService.
+        return this.authService.createUser
+        ( req.body.username,
+          req.body.password,
+          req.body.email);
+      }
 // @UseGuards(AuthGuard('local'))
 //  @Post('signup')
 //  signup(){

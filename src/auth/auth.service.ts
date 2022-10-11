@@ -26,10 +26,23 @@ export class AuthService {
    
     @InjectModel() private readonly knex: Knex
   ) {}
+      
+  async createUser(username:string,password:string,email:string){
+    const user = await this.usersService.findOne(username);
+    if(user){
+      return"this user is already exist"
+    }else{
+      const q=await this.usersService.insertUser({username,password,email});
+      // console.log(q);
+      return "user created successfully";
+
+    }
+  }
+
 
     async validateUser(username: string, password: string): Promise<any> {
    
-      const user = await this.usersService.findOne(username,password);
+      const user = await this.usersService.findOne(username);
       if (user && user.password === password) {
         const { password, ...result } = user;
         return result;

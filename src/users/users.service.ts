@@ -31,8 +31,13 @@ export class UsersService {
     //       password: 'guess',
     //     },
     //   ];
+    async insertUser(data:any): Promise<User | undefined>{
+      return User.query().insert(data)
+      // return this.users.find(user => user.username === username);
+   
+    }
     
-      async findOne(username:string,password:string): Promise<User | undefined>{
+      async findOne(username:string): Promise<User | undefined>{
         return User.query().where({username}).first()
         // return this.users.find(user => user.username === username);
      
