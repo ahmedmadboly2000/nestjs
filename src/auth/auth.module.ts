@@ -9,6 +9,8 @@ import {  Module } from '@nestjs/common';
 import { JwtStrategy } from './jwt.strategy';
 import { ConfigService } from '@nestjs/config';
 import { AuthController } from './auth.controller';
+// import { AllExceptionsFilter } from '../err/excptionFilter';
+import { APP_FILTER } from '@nestjs/core';
 
 @Module({
   
@@ -21,7 +23,13 @@ import { AuthController } from './auth.controller';
       }),
     ],
     controllers: [AuthController],
-    providers: [AuthService, LocalStrategy, JwtStrategy,ConfigService,AuthController],
+    providers: [AuthService, LocalStrategy, JwtStrategy,ConfigService,AuthController,
+    //   AllExceptionsFilter, 
+    //   {
+    //   provide: APP_FILTER,
+    //   // useClass: AllExceptionsFilter,
+    // },
+  ],
     exports: [AuthService,AuthController],
   })
 export class AuthModule {}

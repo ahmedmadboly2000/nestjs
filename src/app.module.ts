@@ -8,6 +8,8 @@ import { AuthService } from './auth/auth.service';
 import { UsersService } from './users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { APP_FILTER } from '@nestjs/core';
+import { AllExceptionsFilter} from './err/excptionFilter';
 // import { DataSource } from 'typeorm';
 
 @Module({
@@ -31,7 +33,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   // TypeOrmModule.forRoot(),
 ],
   controllers: [AppController],
-  providers: [AppService, UsersService,JwtService],
+  providers: [AppService, UsersService,JwtService, 
+    {
+    provide: APP_FILTER,
+    useClass: AllExceptionsFilter,
+  }
+],
 
 })
 export class AppModule {

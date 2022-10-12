@@ -1,9 +1,10 @@
-import { Controller, Post, UseGuards , Request, Get ,Response} from '@nestjs/common';
+import { Controller, Post, UseGuards , Request, Get ,Response, UseFilters} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import {AuthenticatedGuard } from './jwt-auth.guard';
 import knex from "../db/client_knex";
 import { access } from 'fs';
+// import { AllExceptionsFilter} from '../err/excptionFilter';
 var DB=require("../db/migrations/20220927155625_users")
 knex;
 
@@ -36,14 +37,16 @@ export class AuthController {
         }
 
         // @UseGuards(AuthGuard('local'))
+      // @UseFilters(AllExceptionsFilter)
+      // @UseGuards(QueryErrorFilter)
       @Post('register')
       async register(@Request() req:any) {
         console.log(req.body);
         // this.authService.
-        return this.authService.createUser
-        ( req.body.username,
-          req.body.password,
-          req.body.email);
+        return this.authService.createUser(req.body)
+        // ( req.body.username,
+        //   req.body.password,
+        //   req.body.email);
       }
 // @UseGuards(AuthGuard('local'))
 //  @Post('signup')

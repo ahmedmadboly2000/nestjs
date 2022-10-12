@@ -11,7 +11,7 @@ export default class User extends Model {
   // }
   static this: any;
   password: string;
-  
+    
   static get tableName() {
     return 'users';
   }

@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UseInterceptors } from '@nestjs/common';
 import knex  from 'knex';
+// import { AllExceptionsFilter } from '../err/excptionFilter';
 import User from 'src/models/user';
 ({
   client: 'mysql',
