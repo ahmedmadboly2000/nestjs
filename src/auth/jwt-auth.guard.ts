@@ -1,32 +1,55 @@
 
-import {  Injectable, UnauthorizedException } from '@nestjs/common';
-import { UsersService } from 'src/users/users.service';
+import { Injectable, CanActivate, ExecutionContext, UnauthorizedException, BadRequestException, HttpStatus } from '@nestjs/common';
+import { response } from 'express';
+import User from 'src/models/user';
 
-import { Knex } from 'knex';
-import { InjectModel } from 'nest-knexjs';
-import { JwtService } from '@nestjs/jwt';
+
 @Injectable()
-export class AuthenticatedGuard {
-    constructor(
-        private usersService: UsersService,
-        private jwtService: JwtService,
-       
-        @InjectModel() private readonly knex: Knex
-      ) {}
-
-   async check (access_token:string){
-      //  access_token = authorizationHeader.substring("Bearer ".length);
-    //   const user = await this.usersService.findToken(access_token);
-    //   if (user && user.access_token === access_token) {
-    //     const { access_token, ...result } = user;
-    //     return result;
-    //   }
-    //   return 'not found';
-    // // // }
-    const user = await this.usersService.findToken(access_token);
-    if (!user) {
-      throw new UnauthorizedException("token is not correct");
-    }
-    return true;
-  }
+export class AuthenticatedGuard implements CanActivate {
+  
+  async canActivate(
+    context: ExecutionContext,
+  ): Promise<any> {
+    const request = context.switchToHttp().getRequest();
+    const response = context.switchToHttp().getResponse();
+    
+    let status: HttpStatus;
+    let errorMessage: string= 'token is not correct';
+      const user = await this.findToken(request.header('authorization'));
+        if (user) {
+          
+          return true;
+        }else {
+          response.json("token is not correct")
+          // response.("token is not correct")
+          // throw new BadRequestException("token is not correct");
+           }
+ 
 }
+  
+      async findToken(access_token:string): Promise<User | undefined>{
+        // console.log(access_token,"llllllljjjjjjl");
+        
+        if(access_token.split(" ").length > 1){
+          // console.log(access_token.split(" ")[1]);
+          // console.log(access_token.includes("Bearer "));
+          access_token = access_token.split(" ").pop()
+          
+          // if(access_token.includes("Bearer ")){
+          //   access_token = access_token.split(" ")[1]
+          // }
+        }
+          
+  
+        return User.query().where({access_token}).first()
+        // return this.users.find(user => user.username === username);
+     
+      
+      }
+     
+      
+    }
+
+
+      
+

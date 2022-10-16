@@ -31,4 +31,4 @@ export default class User extends Model {
     };
 
 }}
-export{User}
+// export{User}

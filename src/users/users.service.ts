@@ -1,16 +1,7 @@
 import { Injectable, UseInterceptors } from '@nestjs/common';
-import knex  from 'knex';
-// import { AllExceptionsFilter } from '../err/excptionFilter';
+
 import User from 'src/models/user';
-({
-  client: 'mysql',
-  connection: {
-    // host: '127.0.0.1',
-    user: 'root',
-    password: '',
-    database: 'myapp2_test',
-  }
-})
+
 // export type User = any;
 @Injectable()
 export class UsersService {

@@ -1,20 +1,11 @@
 import { Controller, Post, UseGuards , Request, Get ,Response, UseFilters} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
-import {AuthenticatedGuard } from './jwt-auth.guard';
-import knex from "../db/client_knex";
-import { access } from 'fs';
-// import { AllExceptionsFilter} from '../err/excptionFilter';
-var DB=require("../db/migrations/20220927155625_users")
-knex;
+import { JwtAuthGuard } from './newGuard';
+import { AuthenticatedGuard } from './jwt-auth.guard';
 
-function userConnect(myapp2_test: any) {
-  var db: any = new DB();
-  var knex = db.connect(myapp2_test);
-  userConnect("myapp2_test");
-
-}
 @Controller('auth')
+// @UseGuards(AuthenticatedGuard)
 export class AuthController {
     constructor(private authService:AuthService){}
 
@@ -27,11 +18,13 @@ export class AuthController {
         return this.authService.login(req.user);
       }
 
+      // @UseGuards(JwtAuthGuard)
       @UseGuards(AuthenticatedGuard)
+      // @UseFilters(InCorrectToken)
         @Get('profile')
         getProfile(@Request() req) {
-          // console.log(req.header('authorization')); 
-        
+          // console.log(req.header('authorization'),'jjjjjjjjjjjjj'); 
+        // return "ok"
           return this.authService.check(req.header('authorization'));
           
         }

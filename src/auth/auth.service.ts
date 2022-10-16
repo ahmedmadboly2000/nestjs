@@ -7,9 +7,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto){}
 import { Knex } from 'knex';
 import { InjectModel } from 'nest-knexjs';
 import User from 'src/models/user';
-// import { AllExceptionsFilter } from '../err/excptionFilter';
-import { ERROR } from 'sqlite3';
-import { error } from 'console';
+
 
 
 ({
@@ -27,7 +25,6 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-    // private allExceptionFilter:AllExceptionsFilter,
    
     @InjectModel() private readonly knex: Knex
   ) {}
