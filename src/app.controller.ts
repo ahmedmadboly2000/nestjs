@@ -1,5 +1,6 @@
-import { Get, Controller, Request, Post, UseGuards } from '@nestjs/common';
+import { Get, Controller, Request, Post, UseGuards, UseInterceptors, UploadedFiles, UploadedFile, Res } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { FileInterceptor } from '@nestjs/platform-express/multer';
 import { AuthService } from './auth/auth.service';
 import { AuthenticatedGuard } from './auth/jwt-auth.guard';
 import knex from './db/client_knex';
@@ -18,6 +19,14 @@ export class AppController {
   getHello(): any {
     throw new Error('Method not implemented.');
   }
+  // @Post('upload')
+  // // @UseGuards(AuthenticatedGuard)
+  // @UseInterceptors(FileInterceptor('file', { dest: './uploads' }))
+  // uploadSingle(@UploadedFile() file,@Request() req) {
+  //   console.log(file);
+  //   return file.filename
+  // }
+
 
   @Get('test')
   test()

@@ -11,6 +11,7 @@ export default class User extends Model {
   // }
   static this: any;
   password: string;
+  id: any;
     
   static get tableName() {
     return 'users';
@@ -26,6 +27,13 @@ export default class User extends Model {
         password: { type: 'string', minLength: 1, maxLength: 255 },
         email: { type: 'string', minLength: 1, maxLength: 255 },
         access_token: { type: 'string', minLength: 1, maxLength: 255 },
+        image:{
+          type:["string","null"]
+          // media: {
+          //     "binaryEncoding": "base64",
+          //     "type": "image/png"
+          // }
+      },
 
       }
     };

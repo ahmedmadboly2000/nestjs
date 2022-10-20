@@ -35,6 +35,9 @@ export class AuthService {
     // return this.users.find(user => user.username === username);
  
   }
+   async updateImage(image){
+    return User.query().insert(image)
+}
   // public createUser(newUser: Partial<User>): Promise<User> {
     // return this.usersService.insertUser(newUser)
     // .catch((e) => {
