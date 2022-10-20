@@ -6,6 +6,9 @@ const { objection } = require('objection');
 export default class AreasModel extends Model {
   branches?: any[];
   static this: any;
+  name: any;
+  id: any;
+  name_en: any;
   static get tableName() {
     return 'areas';
   }

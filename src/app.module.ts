@@ -6,13 +6,11 @@ import { UsersModule } from './users/users.module';
 import { KnexModule } from 'nest-knexjs';
 import { UsersService } from './users/users.service';
 import { JwtService } from '@nestjs/jwt';
-import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 // import { AllExceptionsFilter} from './err/excptionFilter';
-import { join } from 'path';
-import { ServeStaticModule } from '@nestjs/serve-static'
 // import LogsMiddleware from './history';
 import { logsModule } from './logs/logs.module';
 import { AreaModule } from './areas/area.module';
+import { DrobDownModule } from './drobDown/drobdown.module';
 // import { LogService } from './logs/logsService';
 
 @Module({
@@ -32,7 +30,7 @@ import { AreaModule } from './areas/area.module';
       },
     }),
    
-  AuthModule, UsersModule,logsModule,AreaModule
+  AuthModule, UsersModule,logsModule,AreaModule,DrobDownModule
 
 ],
   controllers: [AppController],
