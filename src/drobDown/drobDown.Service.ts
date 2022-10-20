@@ -1,7 +1,11 @@
 import { Injectable} from '@nestjs/common';
 import { Knex } from 'knex';
 import { InjectModel } from 'nest-knexjs';
+import AgencyModel from 'src/models/AgencyModel';
 import AreaModel from 'src/models/Areas';
+import AttributeModel from 'src/models/AttributesModel';
+import BranchesModel from 'src/models/BranchModel';
+
 
 ({
     client: 'mysql',
@@ -20,7 +24,7 @@ export class DrobDownService {
       ) {}
      
       async findAllArea(header) {
-      var names= header == 'en' ? 'name_en' : 'name'
+      var names= header == 'en' ? 'name_en as name' : 'name as name'
       const row =await AreaModel.query().select('id',names )
       return row
       // const row =await AreaModel.query()
@@ -42,13 +46,20 @@ export class DrobDownService {
         //   };
       }
     
-      async findArea(id){
-      
-        const row = await AreaModel.query().where({id})
-          return row
-     
+      async findAllAgencies(header) {
+        var names= header == 'en' ? 'name_en as name' : 'name as name'
+        const row =await AgencyModel.query().select('id',names )
+        return row
       }
-   
- 
+      async findAllAttributes(header) {
+        var names= header == 'en' ? 'name_en as name' : 'name as name'
+        const row =await AttributeModel.query().select('id',names )
+        return row
+      }
+      async findAllBranches(header) {
+        var names= header == 'en' ? 'name_en as name' : 'name as name'
+        const row =await BranchesModel.query().select('id',names )
+        return row
+      }
     
   }

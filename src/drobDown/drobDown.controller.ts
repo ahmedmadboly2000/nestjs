@@ -13,13 +13,23 @@ export class DrobDownController {
     return this.DrobDownService.findAllArea(req.headers['lang']);
   }
 
-  // @Post('findArea')
-  // async findOne(@Request() req:any) {
-  //   console.log(req.body);
-  //   // console.log(this.AreaService.findArea(req.body));
+  @Get('allAgencies')
+  async findAllAgencies(@Request() req:any) {
+    // console.log(req);
     
-  //   // return this.AreaService.findArea(req.body);
-  // }
-
+    return this.DrobDownService.findAllAgencies(req.headers['lang']);
+  }
+  @Get('allAttributes')
+  async findAllAttributes(@Request() req:any) {
+    // console.log(req);
+    
+    return this.DrobDownService.findAllAttributes(req.headers['lang']);
+  }
+  @Get('allBranches')
+  async findAllBravches(@Request() req:any) {
+    // console.log(req);
+    
+    return this.DrobDownService.findAllBranches(req.headers['lang']);
+  }
  
-}
+} 
