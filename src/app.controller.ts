@@ -3,6 +3,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express/multer';
 import { AuthService } from './auth/auth.service';
 import { AuthenticatedGuard } from './auth/jwt-auth.guard';
+import { AppService } from "./app.service";
 import knex from './db/client_knex';
 var DB=require("./db/migrations/20220927155625_users")
 knex;
@@ -15,7 +16,9 @@ function userConnect(myapp2_test: any) {
 }
 @Controller('')
 export class AppController {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,
+    private appService:AppService
+    ) {}
   getHello(): any {
     throw new Error('Method not implemented.');
   }
@@ -54,6 +57,13 @@ export class AppController {
           // console.log(req.header('authorization')); 
         
           return this.authService.check(req.header('authorization'));
+          
+        }
+        @Get('allcars')
+        getalldata(@Request() req) {
+          // console.log(req.header('authorization')); 
+        
+          return this.appService.findAllcars();
           
         }
   // @UseGuards(AuthGuard('local'))
