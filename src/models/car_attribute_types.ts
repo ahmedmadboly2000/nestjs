@@ -27,27 +27,27 @@ modefied_at:Date
           to: 'attributes.id'
         },
       },
-      AttributeTypes: {
-        relation: Model.ManyToManyRelation,
-        modelClass: CarAttributeTypesModel,
-        join: {
-          from: 'cars.id',
-          through: {
-            // persons_movies is the join table.
-            from: 'car_attribute.car_id',
-            to: 'car_attribute.car_attribute_id'
-          },
-          to: 'car_attribute_types.id'
-        }
-  },
-  attribute_type: {
-    relation: Model.BelongsToOneRelation,
-    modelClass: CarAttributeTypesModel, 
-    join: {
-      from: 'attributes.attribute_type_id',
-      to: 'car_attribute_types.id',
-    },
-  },
+  //     AttributeTypes: {
+  //       relation: Model.ManyToManyRelation,
+  //       modelClass: CarAttributeTypesModel,
+  //       join: {
+  //         from: 'cars.id',
+  //         through: {
+  //           // persons_movies is the join table.
+  //           from: 'car_attribute.car_id',
+  //           to: 'car_attribute.car_attribute_id'
+  //         },
+  //         to: 'car_attribute_types.id'
+  //       }
+  // },
+  // attribute_type: {
+  //   relation: Model.BelongsToOneRelation,
+  //   modelClass: CarAttributeTypesModel, 
+  //   join: {
+  //     from: 'attributes.attribute_type_id',
+  //     to: 'car_attribute_types.id',
+  //   },
+  // },
     };
   }
 }

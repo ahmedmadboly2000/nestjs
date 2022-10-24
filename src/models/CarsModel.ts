@@ -20,19 +20,7 @@ attribute_type_id:number
     static get relationMappings() {
   
       return {
-    // attributes: {
-    //   relation: Model.ManyToManyRelation,
-    //   modelClass: AttributeModel,
-    //   join: {
-    //     from: 'cars.id',
-    //     through: {
-    //       // persons_movies is the join table.
-    //       from: 'car_attribute.car_id',
-    //       to: 'car_attribute.attribute_id'
-    //     },
-    //     to: 'attributes.id'
-    //   },
-    // },
+    
     
     CarAttributeTypesModel: {
       relation: Model.ManyToManyRelation,
@@ -47,19 +35,7 @@ attribute_type_id:number
         to: 'car_attribute_types.id'
       }
 },
-attributes: {
-      relation: Model.ManyToManyRelation,
-      modelClass: AttributeModel,
-      join: {
-        from: 'car_attribute_types.id', 
-        through: {
-          // persons_movies is the join table.
-          from: 'car_attribute.car_attribute_id',
-          to: 'car_attribute.attribute_id'
-        },
-        to: 'attributes.id'
-      },
-    },
+
 }
 }
 }
